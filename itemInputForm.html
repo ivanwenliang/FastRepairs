@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--Book input form -->
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+      <title>Insert Book details</title>
+   </head>
+   <body>
+	<!--Form link to proper php file -->
+   <form method="post" action="http://students.engr.scu.edu/~mnaito/procBookInput.php">
+  <fieldset>
+			<!--Get Customer Info through text boxs -->
+        	<legend style="color:blue;font-size:30px">Customer Info</legend>
+            <label for="custName">Name:</label>
+        	<input type="text" name="custName" id="custName">
+			<label for="phoneNo">Phone Number:</label>
+        	<input type="text" name="phoneNo" id="phoneNo">
+        </fieldset>
+       
+        <!--Do they have contract? -->
+        <fieldset>
+        	<legend style="color:blue;font-size:30px">Do you have a service contract?</legend>
+            <input type="radio" name="contract" id="yes" value="yes">
+            <label for="yes">Yes</label>
+            
+            <!-- If contract, fill out info -->
+            <div class="reveal-if-active">
+        	    <legend style="color:blue;font-size:30px">Service Contract Info</legend>
+                <label for="contractId">ContractID:</label>
+                <input type="text" name="contractId" id="contractId">
+                <label for="startDate">Start Date:</label>
+                <input type="date" name="startDate" id="startDate">
+                <label for="endDate">End Date:</label>
+                <input type="date" name="endDate" id="endDate">
+            </div>
+            
+            <input type="radio" name="contract" id="no" value="no">
+            <label for="no">No</label>
+
+        </fieldset>
+       
+        <!--Repair Item Info -->
+        <fieldset>
+			
+        	<legend style="color:blue;font-size:30px">Repair Item Info</legend>
+            <!-- Maybe autogenerate instead of have them fill it in for item ID -->
+            <label for="itemId">Item ID:</label>
+        	<input type="text" name="itemId" id="itemId">
+			<label for="model">Model:</label>
+        	<input type="text" name="model" id="model">
+            <label for="price">Price:</label>
+        	<input type="number" name="price" id="price">
+            <label for="price">Price:</label>
+        	<input type="number" name="price" id="price">
+
+        </fieldset>      
+        <fieldset>
+			<!--Get category through text box -->
+        	<legend style="color:blue;font-size:30px" >Comments</legend>
+        	<textarea name="comments" id="comments" rows="4" cols="50"></textarea>
+        </fieldset>
+    
+            <input type="submit" value="Submit">
+        	<input type="reset" value="Reset">
+ </form>
+   </body>
+</html>
+
