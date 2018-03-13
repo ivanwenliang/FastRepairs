@@ -45,8 +45,8 @@
             </div>
         </nav> -->
 
-    	<!--Form link to proper php file -->
-        <form method="post" action="http://students.engr.scu.edu/~mnaito/procBookInput.php">
+    	<!--Form link to php file for data insertion -->
+        <form method="post" action="http://students.engr.scu.edu/~iliang/repairData.php">
 
         <div class="container">
             <div class="py-5 text-center">
@@ -88,21 +88,21 @@
                     </form>
                 </div>
         
-        
+
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Customer Info</h4>
                     <form class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Valid first name is required.
                                 </div>
@@ -111,7 +111,7 @@
 
                         <div class="mb-3">
                             <label for="phoneNo">Phone Number</label>
-                            <input type="text" class="form-control" id="phoneNo" placeholder="000-000-0000" required>
+                            <input type="text" class="form-control" id="phoneNo" name="phoneNo" placeholder="000-000-0000" required>
                             <div class="invalid-feedback">
                                 Valid phone number is required.
                             </div>
@@ -119,7 +119,7 @@
 
                         <div class="mb-4">
                             <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="machineID">Machine ID</label>
-                                <input type="text" class="form-control" id="machineID" placeholder="" required>
+                                <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" required>
                                 <small class="text-muted">Serial number of your machine</small>
                                 <div class="invalid-feedback">
                                     Machine ID is required.
@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="model">Item Model</label>
-                                <select class="custom-select d-block w-100" id="model" required>
+                                <select class="custom-select d-block w-100" id="model" name="model" required>
                                     <option value="">Choose...</option>
                                     <option>Macbook Pro 2014 13-inch</option>
                                     <option>Macbook Pro 2014 15-inch</option>
@@ -156,11 +156,13 @@
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" placeholder="" required>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="" required>
                                 <div class="invalid-feedback">
                                     Price is required.
                                 </div>
                             </div>
+
+
                         </div>
 
                         <hr class="mb-4">
