@@ -1,68 +1,239 @@
 <!DOCTYPE html>
-<!--Book input form -->
 <html lang="en">
-<head>
-	<meta charset="utf-8"/>
-      <title>Insert Book details</title>
-   </head>
-   <body>
-	<!--Form link to proper php file -->
-   <form method="post" action="http://students.engr.scu.edu/~mnaito/procBookInput.php">
-  <fieldset>
-			<!--Get Customer Info through text boxs -->
-        	<legend style="color:blue;font-size:30px">Customer Info</legend>
-            <label for="custName">Name:</label>
-        	<input type="text" name="custName" id="custName">
-			<label for="phoneNo">Phone Number:</label>
-        	<input type="text" name="phoneNo" id="phoneNo">
-        </fieldset>
-       
-        <!--Do they have contract? -->
-        <fieldset>
-        	<legend style="color:blue;font-size:30px">Do you have a service contract?</legend>
-            <input type="radio" name="contract" id="yes" value="yes">
-            <label for="yes">Yes</label>
-            
-            <!-- If contract, fill out info -->
-            <div class="reveal-if-active">
-        	    <legend style="color:blue;font-size:30px">Service Contract Info</legend>
-                <label for="contractId">ContractID:</label>
-                <input type="text" name="contractId" id="contractId">
-                <label for="startDate">Start Date:</label>
-                <input type="date" name="startDate" id="startDate">
-                <label for="endDate">End Date:</label>
-                <input type="date" name="endDate" id="endDate">
+    <head>
+    	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>FastRepairs</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+        <!-- Link to stylesheet -->
+        <link href="style.css" rel="stylesheet">
+    </head>
+
+    <body class="bg-light">
+
+        <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">FastRepair</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
-            
-            <input type="radio" name="contract" id="no" value="no">
-            <label for="no">No</label>
+        </nav> -->
 
-        </fieldset>
-       
-        <!--Repair Item Info -->
-        <fieldset>
-			
-        	<legend style="color:blue;font-size:30px">Repair Item Info</legend>
-            <!-- Maybe autogenerate instead of have them fill it in for item ID -->
-            <label for="itemId">Item ID:</label>
-        	<input type="text" name="itemId" id="itemId">
-			<label for="model">Model:</label>
-        	<input type="text" name="model" id="model">
-            <label for="price">Price:</label>
-        	<input type="number" name="price" id="price">
-            <label for="price">Price:</label>
-        	<input type="number" name="price" id="price">
+    	<!--Form link to proper php file -->
+        <form method="post" action="http://students.engr.scu.edu/~mnaito/procBookInput.php">
 
-        </fieldset>      
-        <fieldset>
-			<!--Get category through text box -->
-        	<legend style="color:blue;font-size:30px" >Comments</legend>
-        	<textarea name="comments" id="comments" rows="4" cols="50"></textarea>
-        </fieldset>
-    
-            <input type="submit" value="Submit">
-        	<input type="reset" value="Reset">
- </form>
-   </body>
+        <div class="container">
+            <div class="py-5 text-center">
+                <h2>Fast Repairs</h2>
+                <p class="lead">Leading Machine Repair Center For Computers and Printers</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 order-md-1">
+                    <h4 class="mb-3">Customer Info</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">First name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName">Last name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid first name is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNo">Phone Number</label>
+                            <input type="text" class="form-control" id="phoneNo" placeholder="000-000-0000" required>
+                            <div class="invalid-feedback">
+                                Valid phone number is required.
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <hr class="mb-4">
+
+                        <h4 class="mb-4">Repair Item Info</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="machineID">Machine ID</label>
+                                <input type="text" class="form-control" id="machineID" placeholder="" required>
+                                <small class="text-muted">Serial number of your machine</small>
+                                <div class="invalid-feedback">
+                                    Machine ID is required.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="model">Item Model</label>
+                                <select class="custom-select d-block w-100" id="model" required>
+                                    <option value="">Choose...</option>
+                                    <option>Macbook Pro 2014 13-inch</option>
+                                    <option>Macbook Pro 2014 15-inch</option>
+                                    <option>Macbook Pro 2015 13-inch</option>
+                                    <option>Macbook Pro 2015 15-inch</option>
+                                    <option>Macbook Pro 2016 13-inch</option>
+                                    <option>Macbook Pro 2016 15-inch</option>
+                                    <option>Macbook Pro 2017 13-inch</option>
+                                    <option>Macbook Pro 2017 15-inch</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid model.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Price is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mb-4">
+
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+
+                    </form>
+                </div>
+
+               
+
+                <!-- <fieldset>
+        			<!- - Get Customer Info through text boxs - ->
+                	<legend style="color:blue;font-size:30px">Customer Info</legend>
+                    <label for="custName">Name:</label>
+                	<input type="text" name="custName" id="custName">
+        			<label for="phoneNo">Phone Number:</label>
+                	<input type="text" name="phoneNo" id="phoneNo">
+                </fieldset> -->
+               
+                <!-- <!- -Do they have contract? - ->
+                <fieldset>
+                	<legend style="color:blue;font-size:30px">Do you have a service contract?</legend>
+                    <input type="radio" name="contract" id="yes" value="yes">
+                    <label for="yes">Yes</label>
+                    
+                    <!- - If contract, fill out info - ->
+                    <div class="reveal-if-active">
+                	    <legend style="color:blue;font-size:30px">Service Contract Info</legend>
+                        <label for="contractId">ContractID:</label>
+                        <input type="text" name="contractId" id="contractId">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" name="startDate" id="startDate">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" name="endDate" id="endDate">
+                    </div>
+                    
+                    <input type="radio" name="contract" id="no" value="no">
+                    <label for="no">No</label>
+
+                </fieldset> -->
+               
+                <!--
+                <!- -Repair Item Info - ->
+                <fieldset>
+        			
+                	<legend style="color:blue;font-size:30px">Repair Item Info</legend>
+                    <!- - Maybe autogenerate instead of have them fill it in for item ID - ->
+                    <label for="itemId">Item ID:</label>
+                	<input type="text" name="itemId" id="itemId">
+        			<label for="model">Model:</label>
+                	<input type="text" name="model" id="model">
+                    <label for="price">Price:</label>
+                	<input type="number" name="price" id="price">
+                    
+                </fieldset>  
+                -->
+
+                <!--
+                <fieldset>
+        			<!- -Get category through text box - ->
+                	<legend style="color:blue;font-size:30px" >Comments</legend>
+                	<textarea name="comments" id="comments" rows="4" cols="50"></textarea>
+                </fieldset>
+                -->
+            </div>
+
+             <footer class="my-5 pt-5 text-muted text-center text-small">
+                  <p class="mb-1">&copy; 2018 Gang Gang</p>
+                  <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">L</a></li>
+                    <li class="list-inline-item"><a href="#">O</a></li>
+                    <li class="list-inline-item"><a href="#">L</a></li>
+                  </ul>
+                </footer>
+
+        </div>
+        </form>
+
+
+        <!-- Bootstrap Javascript -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+          // Example starter JavaScript for disabling form submissions if there are invalid fields
+          (function() {
+            'use strict';
+
+            window.addEventListener('load', function() {
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                }, false);
+              });
+            }, false);
+          })();
+        </script>
+    </body>
 </html>
 
