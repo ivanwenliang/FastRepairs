@@ -21,19 +21,21 @@
 
 -- Customer(custName, phoneNo)
 create table Customers(
-    custName VARCHAR(25) NOT NULL,
-    phoneNo NUMERIC(10) PRIMARY KEY
+    custFirst VARCHAR(15) NOT NULL,
+    custLast VARCHAR(15) NOT NULL,
+    custPhoneNo NUMERIC(10) PRIMARY KEY
 );
 
 
 -- Repair Items(machineID, model, price, phoneNo, serviceContractType)
+-- List of individual machines, get info at time of input
 create table RepairItems(
     machineID VARCHAR(5) PRIMARY KEY,
     model VARCHAR(15),
     price NUMERIC(7,2),
-    phoneNo NUMERIC(10),
+    custPhoneNo NUMERIC(10),
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
-    foreign key (phoneNo) references Customers(phoneNo)
+    foreign key (custPhoneNo) references Customers(custPhoneNo)
 );
 
 
@@ -42,47 +44,60 @@ create table ServiceContract(
     contractID VARCHAR(5) PRIMARY KEY,
     startDate date NOT NULL,
     endDate date NOT NULL,
-    machineID VARCHAR(5) NOT NULL,
-    machineID2 VARCHAR(5),
-    phoneNo NUMERIC(10),
-    foreign key (phoneNo) references Customers(phoneNo)
+    machineID VARCHAR(5) UNIQUE NOT NULL,
+    machineID2 VARCHAR(5) UNIQUE,
+    custPhoneNo NUMERIC(10),
+    -- contract is either single or group
+    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP'),
+    foreign key (custPhoneNo) references Customers(custPhoneNo)
 );
+
+
+-- Repair Employee
+create table RepairPerson(
+    employeeNo VARCHAR(5) PRIMARY KEY,
+    employeeFirst VARCHAR(15) NOT NULL,
+    employeeLast VARCHAR(15) NOT NULL,
+    phoneNo NUMERIC(10)
+);
+
 
 -- Repair Job(machineID, contractID, arrivalTime, ownerInfo, jobstat)
 -- DATE FORMAT: DD-MON-YYYY
 -- ex: select to_char(sysdate, 'DD-Mon-YYYY HH24:MI') as "Current Time" from dual;
 create table RepairJob(
-    machineID VARCHAR(5),
+    machineID VARCHAR(5) UNIQUE NOT NULL,
+    machineID2 VARCHAR(5) UNIQUE,
     contractID VARCHAR(5),
-    arrivalTime DATE, 
-    ownerInfo NUMERIC(10), 
+    arrivalTime TIMESTAMP, 
+    custPhoneNo NUMERIC(10), 
     jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
-    foreign key (machineID) references RepairItems(machineID),
+    employeeNo VARCHAR(5),
+    foreign key (machineID) references ServiceContract(machineID),
+    foreign key (machineID2) references ServiceContract(machineID2),    
     foreign key (contractID) references ServiceContract(contractID),
-    foreign key (ownerInfo) references Customers(phoneNo)
+    foreign key (custPhoneNo) references Customers(custPhoneNo),
+    foreign key (employeeNo) references RepairPerson(employeeNo),
+    PRIMARY KEY(arrivalTime, custPhoneNo)
 );
 
--- Repair Employee
-create table RepairPerson(
-    employeeNo VARCHAR(5) PRIMARY KEY,
-    employeeName VARCHAR(25),
-    phoneNo NUMERIC(10) UNIQUE
-);
 
 -- Problem Code
 -- contains descriptions of problem codes
 create table ProblemCode(
-    problemCode VARCHAR(5) PRIMARY KEY,
-    description VARCHAR(20),
+    problemCode VARCHAR(30) UNIQUE
 );
 
 -- Problem Report
 -- Weak Entity depends on RepairJob
 create table ProblemReport(
-    problemCode VARCHAR(5),
-    arrivalTime DATE,
-    ownerInfo NUMERIC(10),
-    PRIMARY KEY(problemCode, arrivalTime, ownerInfo)
+    problemCode VARCHAR(30),
+    arrivalTime TIMESTAMP,
+    custPhoneNo NUMERIC(10),
+    -- foreign key (custPhoneNo) references Customers(custPhoneNo),
+    -- foreign key (arrivalTime) references RepairJob(arrivalTime),
+    PRIMARY KEY(arrivalTime, custPhoneNo),
+    constraint atime_cphone foreign key (arrivalTime,custPhoneNo) references RepairJob(arrivalTime,custPhoneNo)
 );
 
 
@@ -90,24 +105,28 @@ create table ProblemReport(
 -- CustomerBill(machineId, model, customerName, custPhoneNo, arrivalTime, timeOut, problemCodes, repair_personId, laborHours, partsUsedCost, totalCost)
 -- References most of its content from other tables
 create table CustomerBill(
-    machineId VARCHAR(5), 
+    machineID VARCHAR(5),
+    machineID2 VARCHAR(5),
     model VARCHAR(15), 
-    customerName VARCHAR(25), 
+    custFirst VARCHAR(15),
+    custLast VARCHAR(15),
     custPhoneNo NUMERIC(10), 
     arrivalTime DATE, 
     timeOut DATE, 
-    #single problem for now
-    problemCodes VARCHAR(5), 
+    --single problem for now
+    problemCode VARCHAR(30), 
     repair_personID VARCHAR(5), 
     laborHours NUMERIC(3,2), 
     partsUsedCost NUMERIC(5,2), 
     totalCost NUMERIC(5,2),
-    foreign key (machineID) references RepairID(machineID),
-    foreign key (model) references RepairItems(model),
-    foreign key (customerName) references Customers(customerName),
-    foreign key (custPhoneNo) references Customers(phoneNo),
-    foreign key (arrivalTime) references RepairJob(arrivalTime),
-    foreign key (problemCodes) references ProblemReport(problemCode),
-    foreign key (repair_personID) references RepairPerson(employeeNo),
-    foreign key (partsUsedCost) references RepairItems(price)
+    foreign key (machineID) references RepairJob(machineID),
+    foreign key (machineID2) references RepairJob(machineID2),   
+    -- foreign key (model) references RepairItems(model),
+    -- foreign key (custFirst) references Customers(custFirst),
+    -- foreign key (custLast) references Customers(custLast),
+    foreign key (custPhoneNo) references Customers(custPhoneNo),
+    -- foreign key (arrivalTime) references RepairJob(arrivalTime),
+    -- foreign key (problemCode) references ProblemReport(problemCode),
+    foreign key (repair_personID) references RepairPerson(employeeNo)
+    -- foreign key (partsUsedCost) references RepairItems(price)
 );
