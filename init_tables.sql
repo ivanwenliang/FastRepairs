@@ -23,7 +23,8 @@
 create table Customers(
     custFirst VARCHAR(15) NOT NULL,
     custLast VARCHAR(15) NOT NULL,
-    custPhoneNo NUMERIC(10) PRIMARY KEY
+    custPhoneNo NUMERIC(10) PRIMARY KEY,
+    custEmail VARCHAR(20)
 );
 
 
