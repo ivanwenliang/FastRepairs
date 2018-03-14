@@ -70,6 +70,12 @@
                             </div>
                             <span class="text-muted">$</span>
                         </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Labor Cost</h6>
+                                <small class="text-muted">$20/hour</small>
+                            </div>
+                            <span class="text-muted">$</span>
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
                                 <h6 class="my-0">Service contract</h6>
@@ -114,7 +120,7 @@
 
                         <div class="mb-3">
                             <label for="phoneNo">Phone Number</label>
-                            <input type="text" class="form-control input-medium bfh-phone" data-format="+1 (ddd) ddd-dddd" id="phoneNo" name="phoneNo" placeholder="(000) 000-0000" required>
+                            <input type="text" class="form-control input-medium bfh-phone" data-format="+1 (ddd) ddd-dddd" id="phoneNo" name="phoneNo" placeholder="(000) 000-0000" value="" required>
                             <div class="invalid-feedback">
                                 Valid phone number is required.
                             </div>
@@ -122,7 +128,7 @@
 
                         <div class="mb-4">
                             <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="">
                             <div class="invalid-feedback">
                                 Please enter a valid email address.
                             </div>
@@ -134,7 +140,7 @@
                         <div class="row">
                             <div class="col-md-4 mb-3">
                                 <label for="machineID">Machine ID</label>
-                                <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" required>
+                                <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="" required>
                                 <small class="text-muted">Serial number of your machine</small>
                                 <div class="invalid-feedback">
                                     Machine ID is required.
@@ -154,18 +160,68 @@
                                     <option>Macbook Pro 2017 15-inch</option>
                                 </select>
                                 <div class="invalid-feedback">
-                                    Please select a valid model.
+                                    Please select a model.
                                 </div>
                             </div>
                             <div class="col-md-4 mb-4">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" name="price" placeholder="" required>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="" value="" required>
                                 <div class="invalid-feedback">
                                     Price is required.
                                 </div>
                             </div>
+                        </div>
 
+                        <hr class="mb-4">
 
+                        <h4 class="mb-4">Employee Info</h4>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <label for="empNo">Employee Number</label>
+                                <input type="text" class="form-control" id="empNo" name="empNo" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Employee Number is required.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="problemCodes">Problem Code</label>
+                                <select class="custom-select d-block w-100" id="problemCodes" name="problemCodes" required>
+                                    <option value="">Choose...</option>
+                                    <option>A01: Battery Replacement</option>
+                                    <option>A02: Screen Replacement</option>
+                                    <option>A03: Harddrive Replacement</option>
+                                    <option>A04: Recover corrupted data</option>
+                                    <option>B01: Cartridge Replacement</option>
+                                    <option>B02: Printer Part Replacement</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a problem code.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="laborHours">Hours of Labor</label>
+                                <input type="text" class="form-control" id="laborHours" name="laborHours" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid number is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <label for="arrivalTime">Arrival Time</label>
+                                <input type="text" class="form-control" id="arrivalTime" name="laborHours" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid arrival time is required.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="timeOut">Time Out</label>
+                                <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid time out is required.
+                                </div>
+                            </div>
                         </div>
 
                         <hr class="mb-4">

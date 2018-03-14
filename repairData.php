@@ -13,6 +13,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$model= $_POST['model'];
 	$price= $_POST['price'];
 
+	//More info
+	$arrivalTime= $_POST['arrivalTime'];
+	$timeOut= $_POST['timeOut'];
+	$problemCodes= $_POST['problemCodes'];
+	$empNo= $_POST['empNo'];
+	$laborHours= $_POST['laborHours'];
+
+
 	if ($valid) {
 		echo "The form has been submitted."
 	}
@@ -48,6 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$res = oci_execute($query);
 	}
 
+	function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCodes,$empNo,$laborHours) {
+
+	}
 }
 
 ?>
