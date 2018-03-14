@@ -21,7 +21,8 @@
 
 -- Customer(custName, phoneNo)
 create table Customers(
-    custName VARCHAR(25) NOT NULL,
+    custFirst VARCHAR(15) NOT NULL,
+    custLast VARCHAR(15) NOT NULL,
     phoneNo NUMERIC(10) PRIMARY KEY
 );
 
@@ -45,6 +46,8 @@ create table ServiceContract(
     machineID VARCHAR(5) NOT NULL,
     machineID2 VARCHAR(5),
     phoneNo NUMERIC(10),
+    #contract is either single or group
+    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP'),
     foreign key (phoneNo) references Customers(phoneNo)
 );
 
@@ -54,7 +57,7 @@ create table ServiceContract(
 create table RepairJob(
     machineID VARCHAR(5),
     contractID VARCHAR(5),
-    arrivalTime DATE, 
+    arrivalTime TIMESTAMP, 
     ownerInfo NUMERIC(10), 
     jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
     foreign key (machineID) references RepairItems(machineID),
@@ -65,7 +68,8 @@ create table RepairJob(
 -- Repair Employee
 create table RepairPerson(
     employeeNo VARCHAR(5) PRIMARY KEY,
-    employeeName VARCHAR(25),
+    employeeFirst VARCHAR(15) NOT NULL,
+    employeeLast VARCHAR(15) NOT NULL,
     phoneNo NUMERIC(10) UNIQUE
 );
 
