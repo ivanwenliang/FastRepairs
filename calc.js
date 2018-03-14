@@ -23,10 +23,7 @@ $(document).ready(function(){
 
     $('.calc').change(function(){       
         $('.calc').each(function(){
-            if($(this).val() != '')
-            {
-                total = 50 + labor + partstotal;
-            }
+            total = 50 + labor + partstotal;
         });
         $('#total').html(total);
     });
