@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//More info
 	$arrivalTime= $_POST['arrivalTime'];
 	$timeOut= $_POST['timeOut'];
-	$problemCodes= $_POST['problemCodes'];
-	$empNo= $_POST['empNo'];
+	$problemCode= $_POST['problemCode'];
+	$repair_personID= $_POST['repair_personID'];
 	$laborHours= $_POST['laborHours'];
 
 
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$res = oci_execute($query);
 	}
 
-	function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCodes,$empNo,$laborHours) {
+	function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCode,$repair_personID,$laborHours) {
 
 	}
 }
