@@ -38,6 +38,12 @@ create table Customers(
 );
 
 
+-- Problem Code
+-- contains descriptions of problem codes
+create table ProblemCode(
+    problemCode VARCHAR(30) UNIQUE
+);
+
 -- Repair Items(machineID, model, price, phoneNo, serviceContractType)
 -- List of individual machines, get info at time of input
 create table RepairItems(
@@ -45,8 +51,10 @@ create table RepairItems(
     model VARCHAR(15),
     price NUMERIC(7,2),
     custPhoneNo NUMERIC(10),
+    problemCode VARCHAR(30),
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
-    foreign key (custPhoneNo) references Customers(custPhoneNo)
+    foreign key (custPhoneNo) references Customers(custPhoneNo),
+    foreign key (problemCode) references ProblemCode(problemCode)
 );
 
 
@@ -93,11 +101,7 @@ create table RepairJob(
 );
 
 
--- Problem Code
--- contains descriptions of problem codes
-create table ProblemCode(
-    problemCode VARCHAR(30) UNIQUE
-);
+
 
 -- Problem Report
 -- Weak Entity depends on RepairJob
@@ -132,12 +136,6 @@ create table CustomerBill(
     totalCost NUMERIC(5,2),
     foreign key (machineID) references RepairJob(machineID),
     foreign key (machineID2) references RepairItems(machineID),   
-    -- foreign key (model) references RepairItems(model),
-    -- foreign key (custFirst) references Customers(custFirst),
-    -- foreign key (custLast) references Customers(custLast),
     foreign key (custPhoneNo) references Customers(custPhoneNo),
-    -- foreign key (arrivalTime) references RepairJob(arrivalTime),
-    -- foreign key (problemCode) references ProblemReport(problemCode),
     foreign key (repair_personID) references RepairPerson(employeeNo)
-    -- foreign key (partsUsedCost) references RepairItems(price)
 );
