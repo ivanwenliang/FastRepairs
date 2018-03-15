@@ -39,269 +39,247 @@
         </nav> 
 
     	<!--Form link to php file for data insertion -->
-        <form method="post" action="http://students.engr.scu.edu/~iliang/repairData.php">
+        <form method="post" action="http://students.engr.scu.edu/~iliang/FastRepairs/repairData.php">
 
-        <div class="container">
-            <div class="py-5 text-center">
-                <h2>Fast Repairs</h2>
-                <p class="lead">Leading Machine Repair Center For Computers and Printers</p>
+            <div class="container">
+                <div class="py-5 text-center">
+                    <h2>Fast Repairs</h2>
+                    <p class="lead">Leading Machine Repair Center For Computers and Printers</p>
+                </div>
+
+                <div class="row">
+                
+                    <div class="col-md-4 order-md-2 mb4">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">Price</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">Parts</h6>
+                                    <small class="text-muted">Cost of parts for machine.</small>
+                                </div>
+                                <span class="text-muted">$ <span id="partstotal"></span></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">Labor Cost</h6>
+                                    <small class="text-muted">$20/hour</small>
+                                </div>
+                                <span class="text-muted">$ <span id="labor"></span></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">Service Fee</h6>
+                                </div>
+                                <span class="text-muted">$ 50</span>
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-success">
+                                    <h6 class="my-0">Service contract</h6>
+                                </div>
+                                <span class="text-success">-$</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Total (USD)</span>
+                                <strong>$ <span id="total" name="totalCost"></span></strong>
+                            </li>
+                        </ul>
+                    </div>
+            
+
+                    <div class="col-md-8 order-md-1">
+                        <!-- <form class="needs-validation" novalidate> -->
+                        <h4 class="mb-3">Customer Info</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">First name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Last name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid first name is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phoneNo">Phone Number</label>
+                                <input type="text" class="form-control input-medium bfh-phone" data-format="+1 (ddd) ddd-dddd" id="phoneNo" name="phoneNo" placeholder="(000) 000-0000" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid phone number is required.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="">
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+
+                        <!-- </form> -->
+                    </div>
+
+                    <div class="col-md-12 order-md-3 mb-4">
+                        <!-- <form class="needs-validation" novalidate> -->
+                        <h4 class="mb-4">Repair Item Info</h4>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="machineID">Machine ID</label>
+                                    <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="" required>
+                                    <small class="text-muted">Serial number of your machine</small>
+                                    <div class="invalid-feedback">
+                                        Machine ID is required.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="model">Item Model</label>
+                                    <select class="custom-select d-block w-100" id="model" name="model" required>
+                                        <option value="">Choose...</option>
+                                        <option>Macbook Pro 2014 13-inch</option>
+                                        <option>Macbook Pro 2014 15-inch</option>
+                                        <option>Macbook Pro 2015 13-inch</option>
+                                        <option>Macbook Pro 2015 15-inch</option>
+                                        <option>Macbook Pro 2016 13-inch</option>
+                                        <option>Macbook Pro 2016 15-inch</option>
+                                        <option>Macbook Pro 2017 13-inch</option>
+                                        <option>Macbook Pro 2017 15-inch</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a model.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <label for="problemCode">Problem Code</label>
+                                    <select class="custom-select d-block w-100" id="problemCode" name="problemCode" required>
+                                        <option value="">Choose...</option>
+                                        <option>A01: Battery Replacement</option>
+                                        <option>A02: Screen Replacement</option>
+                                        <option>A03: Harddrive Replacement</option>
+                                        <option>A04: Recover corrupted data</option>
+                                        <option>B01: Cartridge Replacement</option>
+                                        <option>B02: Printer Part Replacement</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a problem code.
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <label for="price">Parts Price</label>
+                                    <input type="text" class="form-control parts calc" id="price" name="price" placeholder="" value="" required>
+                                    <div class="invalid-feedback">
+                                        Price is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            
+
+                            <h5 class="mb-3">Second Machine For Repair<span class="text-muted"> (Optional)</span></h5>
+
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="machineID2">Machine ID</label>
+                                    <input type="text" class="form-control" id="machineID2" name="machineID2" placeholder="" value="">
+                                    <small class="text-muted">Serial number of your machine</small>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="model2">Item Model</label>
+                                    <select class="custom-select d-block w-100" id="model2" name="model2">
+                                        <option value="">Choose...</option>
+                                        <option>Macbook Pro 2014 13-inch</option>
+                                        <option>Macbook Pro 2014 15-inch</option>
+                                        <option>Macbook Pro 2015 13-inch</option>
+                                        <option>Macbook Pro 2015 15-inch</option>
+                                        <option>Macbook Pro 2016 13-inch</option>
+                                        <option>Macbook Pro 2016 15-inch</option>
+                                        <option>Macbook Pro 2017 13-inch</option>
+                                        <option>Macbook Pro 2017 15-inch</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <label for="problemCode2">Problem Code</label>
+                                    <select class="custom-select d-block w-100" id="problemCode2" name="problemCode2">
+                                        <option value="">Choose...</option>
+                                        <option>A01: Battery Replacement</option>
+                                        <option>A02: Screen Replacement</option>
+                                        <option>A03: Harddrive Replacement</option>
+                                        <option>A04: Recover corrupted data</option>
+                                        <option>B01: Cartridge Replacement</option>
+                                        <option>B02: Printer Part Replacement</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-4">
+                                    <label for="price2">Parts Price</label>
+                                    <input type="text" class="form-control parts calc" id="price2" name="price2" placeholder="" value="">
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <label for="serviceContractType">Contract Type</label>
+                                    <select class="custom-select d-block w-100" id="serviceContractType" name="serviceContractType" required>
+                                        <option value="">Choose...</option>
+                                        <option>SINGLE</option>
+                                        <option>GROUP</option>
+                                        <option>NONE</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Select a Contract Type.
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="contractID">Contract ID</label>
+                                    <input type="text" class="form-control" id="contractID" name="contractID" placeholder="" value="">
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <label for="empNo">Employee Number</label>
+                                    <select class="custom-select d-block w-100" id="empNo" name="empNo" required>
+                                        <option value="">Choose...</option> 
+                                        <option>e0001</option>
+                                        <option>e0002</option>
+                                        <option>e0003</option>
+                                        <option>e0004</option>
+                                        <option>e0005</option> 
+                                    </select>                             
+                                    <div class="invalid-feedback">
+                                        Employee Number is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+
+                                
+                        <!-- </form> -->
+                    </div>
+                
+                </div>
+
+                <input type="submit" class="btn btn-primary btn-lg btn-block" name="submitForm" value="Submit Form">                     
             </div>
 
-            <div class="row">
-            
-                <div class="col-md-4 order-md-2 mb4">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">Price</span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Parts</h6>
-                                <small class="text-muted">Cost of parts for machine.</small>
-                            </div>
-                            <span class="text-muted">$ <span id="partstotal"></span></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Labor Cost</h6>
-                                <small class="text-muted">$20/hour</small>
-                            </div>
-                            <span class="text-muted">$ <span id="labor"></span></span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">Service Fee</h6>
-                            </div>
-                            <span class="text-muted">$ 50</span>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Service contract</h6>
-                            </div>
-                            <span class="text-success">-$</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                            <span>Total (USD)</span>
-                            <strong>$ <span id="total" name="totalCost"></span></strong>
-                        </li>
-                    </ul>
-                </div>
-        
-
-                <div class="col-md-8 order-md-1">
-                    <form class="needs-validation" novalidate>
-                    <h4 class="mb-3">Customer Info</h4>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phoneNo">Phone Number</label>
-                            <input type="text" class="form-control input-medium bfh-phone" data-format="+1 (ddd) ddd-dddd" id="phoneNo" name="phoneNo" placeholder="(000) 000-0000" value="" required>
-                            <div class="invalid-feedback">
-                                Valid phone number is required.
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address.
-                            </div>
-                        </div>
-
-                        <hr class="mb-4">
-
-                    </form>
-                </div>
-
-                <div class="col-md-12 order-md-3 mb-4">
-                    <form class="needs-validation" novalidate>
-                    <h4 class="mb-4">Repair Item Info</h4>
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="machineID">Machine ID</label>
-                                <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="" required>
-                                <small class="text-muted">Serial number of your machine</small>
-                                <div class="invalid-feedback">
-                                    Machine ID is required.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="model">Item Model</label>
-                                <select class="custom-select d-block w-100" id="model" name="model" required>
-                                    <option value="">Choose...</option>
-                                    <option>Macbook Pro 2014 13-inch</option>
-                                    <option>Macbook Pro 2014 15-inch</option>
-                                    <option>Macbook Pro 2015 13-inch</option>
-                                    <option>Macbook Pro 2015 15-inch</option>
-                                    <option>Macbook Pro 2016 13-inch</option>
-                                    <option>Macbook Pro 2016 15-inch</option>
-                                    <option>Macbook Pro 2017 13-inch</option>
-                                    <option>Macbook Pro 2017 15-inch</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a model.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-4">
-                                <label for="problemCode">Problem Code</label>
-                                <select class="custom-select d-block w-100" id="problemCode" name="problemCode" required>
-                                    <option value="">Choose...</option>
-                                    <option>A01: Battery Replacement</option>
-                                    <option>A02: Screen Replacement</option>
-                                    <option>A03: Harddrive Replacement</option>
-                                    <option>A04: Recover corrupted data</option>
-                                    <option>B01: Cartridge Replacement</option>
-                                    <option>B02: Printer Part Replacement</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a problem code.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-4">
-                                <label for="price">Parts Price</label>
-                                <input type="text" class="form-control parts calc" id="price" name="price" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Price is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        
-
-                        <h5 class="mb-3">Second Machine For Repair<span class="text-muted"> (Optional)</span></h5>
-
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="machineID2">Machine ID</label>
-                                <input type="text" class="form-control" id="machineID2" name="machineID2" placeholder="" value="">
-                                <small class="text-muted">Serial number of your machine</small>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="model2">Item Model</label>
-                                <select class="custom-select d-block w-100" id="model2" name="model2">
-                                    <option value="">Choose...</option>
-                                    <option>Macbook Pro 2014 13-inch</option>
-                                    <option>Macbook Pro 2014 15-inch</option>
-                                    <option>Macbook Pro 2015 13-inch</option>
-                                    <option>Macbook Pro 2015 15-inch</option>
-                                    <option>Macbook Pro 2016 13-inch</option>
-                                    <option>Macbook Pro 2016 15-inch</option>
-                                    <option>Macbook Pro 2017 13-inch</option>
-                                    <option>Macbook Pro 2017 15-inch</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-4">
-                                <label for="problemCode2">Problem Code</label>
-                                <select class="custom-select d-block w-100" id="problemCode2" name="problemCode2">
-                                    <option value="">Choose...</option>
-                                    <option>A01: Battery Replacement</option>
-                                    <option>A02: Screen Replacement</option>
-                                    <option>A03: Harddrive Replacement</option>
-                                    <option>A04: Recover corrupted data</option>
-                                    <option>B01: Cartridge Replacement</option>
-                                    <option>B02: Printer Part Replacement</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 mb-4">
-                                <label for="price2">Parts Price</label>
-                                <input type="text" class="form-control parts calc" id="price2" name="price2" placeholder="" value="">
-                            </div>
-                        </div>
-
-                        <hr class="mb-4">
-
-                        <div class="row">
-                            <div class="col-md-4 mb-4">
-                                <label for="serviceContractType">Contract Type</label>
-                                <select class="custom-select d-block w-100" id="serviceContractType" name="serviceContractType" required>
-                                    <option value="">Choose...</option>
-                                    <option>SINGLE</option>
-                                    <option>GROUP</option>
-                                    <option>NONE</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Select a Contract Type.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <label for="contractID">Contract ID</label>
-                                <input type="text" class="form-control" id="contractID" name="contractID" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid Contract ID is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="mb-4">
-
-                        <h4 class="mb-4">Employee Info</h4>
-
-                        <div class="row">
-                            <div class="col-md-4 mb-4">
-                                <label for="empNo">Employee Number</label>
-                                <select class="custom-select d-block w-100" id="empNo" name="empNo" required>
-                                    <option value="">Choose...</option> 
-                                    <option>e0001</option>
-                                    <option>e0002</option>
-                                    <option>e0003</option>
-                                    <option>e0004</option>
-                                    <option>e0005</option> 
-                                </select>                             
-                                <div class="invalid-feedback">
-                                    Employee Number is required.
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="col-md-4 mb-4">
-                                <label for="arrivalTime">Arrival Time</label>
-                                <input type="text" class="form-control" id="arrivalTime" name="laborHours" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid arrival time is required.
-                                </div>
-                            </div>
-
-                            
-                            
-                        </div>
-
-                        <hr class="mb-4">
-
-                    
-
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Form</button>
-                    </form>
-                </div>
-            
-            </div>
-
-                 <footer class="my-5 pt-5 text-muted text-center text-small">
-                      <p class="mb-1">&copy; 2018 Gang Gang</p>
-                      <ul class="list-inline">
-                        <li class="list-inline-item"><a href="#">L</a></li>
-                        <li class="list-inline-item"><a href="#">O</a></li>
-                        <li class="list-inline-item"><a href="#">L</a></li>
-                      </ul>
-                </footer>
-            
-        </div>
         </form>
+
+         <footer class="my-5 pt-5 text-muted text-center text-small">
+              <p class="mb-1">&copy; 2018 Gang Gang</p>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">L</a></li>
+                <li class="list-inline-item"><a href="#">O</a></li>
+                <li class="list-inline-item"><a href="#">L</a></li>
+              </ul>
+        </footer>
 
 
         <!-- Bootstrap Javascript -->

@@ -90,7 +90,7 @@ create table RepairJob(
     machineID VARCHAR(5) UNIQUE NOT NULL,
     machineID2 VARCHAR(5),
     contractID VARCHAR(5),
-    arrivalTime DATE, 
+    arrivalTime TIMESTAMP, 
     custPhoneNo NUMERIC(10), 
     jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
     employeeNo VARCHAR(5),
@@ -109,7 +109,7 @@ create table RepairJob(
 -- Weak Entity depends on RepairJob
 create table ProblemReport(
     problemCode VARCHAR(30),
-    arrivalTime DATE,
+    arrivalTime TIMESTAMP,
     custPhoneNo NUMERIC(10),
     -- foreign key (custPhoneNo) references Customers(custPhoneNo),
     -- foreign key (arrivalTime) references RepairJob(arrivalTime),
@@ -128,8 +128,8 @@ create table CustomerBill(
     custFirst VARCHAR(15),
     custLast VARCHAR(15),
     custPhoneNo NUMERIC(10), 
-    arrivalTime DATE, 
-    timeOut DATE, 
+    arrivalTime TIMESTAMP, 
+    timeOut TIMESTAMP, 
     -- single problem for now
     problemCode VARCHAR(30), 
     repair_personID VARCHAR(5), 
