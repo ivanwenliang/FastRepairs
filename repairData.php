@@ -12,6 +12,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$machineID= $_POST['machineID'];
 	$model= $_POST['model'];
 	$price= $_POST['price'];
+	$machineID2= $_POST['machineID2'];
+	$model2= $_POST['model2'];
+	$price2= $_POST['price2'];
 
 	//More info
 	$arrivalTime= $_POST['arrivalTime'];
@@ -20,10 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$repair_personID= $_POST['repair_personID'];
 	$laborHours= $_POST['laborHours'];
 
+	insertIntoCustomers($firstName,$lastName,$phoneNo,$email);
 
 	if ($valid) {
 		echo "The form has been submitted."
 	}
+}
 
 	function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
 		$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
@@ -41,7 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$res = oci_execute($query);
 	}
 
-	function insertIntoRepairItems($machineID, $model, $price) {
+
+
+	function insertIntoRepairItems($machineID, $model, $price, $machineID2, $model2, $price2) {
 		$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 		if (!conn) {
 			print "<br> connection failed:";
@@ -54,7 +61,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		oci_bind_by_name($query, ':price', $price);
 
 		$res = oci_execute($query);
+
+		if ($machineID2 != '' && $model2 != '' && $price2 != '') {
+			$query2 = oci_parse($conn, "INSERT INTO RepairItems(machineID,model,price) VALUES(:machineID2,:model2,:price2)");
+
+			oci_bind_by_name($query, ':machineID2', $machineID2);
+			oci_bind_by_name($query, ':model2', $model2);
+			oci_bind_by_name($query, ':price2', $price2);
+
+			$res = oci_execute($query2);
+		}
 	}
+
+//insert default under repair status
+	function insertIntoRepairJobs()
+
+
+	function insertIntoProblemReport()
 
 	function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCode,$repair_personID,$laborHours) {
 

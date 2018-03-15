@@ -70,7 +70,7 @@ create table RepairJob(
     machineID VARCHAR(5) UNIQUE NOT NULL,
     machineID2 VARCHAR(5) UNIQUE,
     contractID VARCHAR(5),
-    arrivalTime TIMESTAMP, 
+    arrivalTime DATE, 
     custPhoneNo NUMERIC(10), 
     jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
     employeeNo VARCHAR(5),
@@ -93,7 +93,7 @@ create table ProblemCode(
 -- Weak Entity depends on RepairJob
 create table ProblemReport(
     problemCode VARCHAR(30),
-    arrivalTime TIMESTAMP,
+    arrivalTime DATE,
     custPhoneNo NUMERIC(10),
     -- foreign key (custPhoneNo) references Customers(custPhoneNo),
     -- foreign key (arrivalTime) references RepairJob(arrivalTime),
