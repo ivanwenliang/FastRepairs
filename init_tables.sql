@@ -54,7 +54,9 @@ create table RepairItems(
     problemCode VARCHAR(30),
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
     foreign key (custPhoneNo) references Customers(custPhoneNo),
-    foreign key (problemCode) references ProblemCode(problemCode)
+    foreign key (problemCode) references ProblemCode(problemCode),
+    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE')
+    foreign key (custPhoneNo) references Customers(custPhoneNo)
 );
 
 

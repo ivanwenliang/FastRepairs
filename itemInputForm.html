@@ -158,8 +158,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-4">
-                                <label for="problemCodes">Problem Code</label>
-                                <select class="custom-select d-block w-100" id="problemCodes" name="problemCodes" required>
+                                <label for="problemCode">Problem Code</label>
+                                <select class="custom-select d-block w-100" id="problemCode" name="problemCode" required>
                                     <option value="">Choose...</option>
                                     <option>A01: Battery Replacement</option>
                                     <option>A02: Screen Replacement</option>
@@ -181,17 +181,20 @@
                             </div>
                         </div>
 
+                        
+                        
+
                         <h5 class="mb-3">Second Machine For Repair<span class="text-muted"> (Optional)</span></h5>
 
                         <div class="row">
                             <div class="col-md-3 mb-3">
-                                <label for="machineID">Machine ID</label>
-                                <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="">
+                                <label for="machineID2">Machine ID</label>
+                                <input type="text" class="form-control" id="machineID2" name="machineID2" placeholder="" value="">
                                 <small class="text-muted">Serial number of your machine</small>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="model">Item Model</label>
-                                <select class="custom-select d-block w-100" id="model" name="model">
+                                <label for="model2">Item Model</label>
+                                <select class="custom-select d-block w-100" id="model2" name="model2">
                                     <option value="">Choose...</option>
                                     <option>Macbook Pro 2014 13-inch</option>
                                     <option>Macbook Pro 2014 15-inch</option>
@@ -204,8 +207,8 @@
                                 </select>
                             </div>
                             <div class="col-md-3 mb-4">
-                                <label for="problemCodes">Problem Code</label>
-                                <select class="custom-select d-block w-100" id="problemCodes" name="problemCodes">
+                                <label for="problemCode2">Problem Code</label>
+                                <select class="custom-select d-block w-100" id="problemCode2" name="problemCode2">
                                     <option value="">Choose...</option>
                                     <option>A01: Battery Replacement</option>
                                     <option>A02: Screen Replacement</option>
@@ -216,8 +219,32 @@
                                 </select>
                             </div>
                             <div class="col-md-3 mb-4">
-                                <label for="price">Parts Price</label>
-                                <input type="text" class="form-control parts calc" id="price" name="price" placeholder="" value="">
+                                <label for="price2">Parts Price</label>
+                                <input type="text" class="form-control parts calc" id="price2" name="price2" placeholder="" value="">
+                            </div>
+                        </div>
+
+                        <hr class="mb-4">
+
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <label for="serviceContractType">Contract Type</label>
+                                <select class="custom-select d-block w-100" id="serviceContractType" name="serviceContractType" required>
+                                    <option value="">Choose...</option>
+                                    <option>SINGLE</option>
+                                    <option>GROUP</option>
+                                    <option>NONE</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Select a Contract Type.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <label for="contractID">Contract ID</label>
+                                <input type="text" class="form-control" id="contractID" name="contractID" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Valid Contract ID is required.
+                                </div>
                             </div>
                         </div>
 
@@ -250,13 +277,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mb-4">
-                                <label for="contractID">Contract ID</label>
-                                <input type="text" class="form-control" id="contractID" name="contractID" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid time out is required.
-                                </div>
-                            </div>
+                            
                             
                         </div>
 
@@ -264,7 +285,7 @@
 
                     
 
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Form</button>
                     </form>
                 </div>
             
