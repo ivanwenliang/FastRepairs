@@ -35,7 +35,7 @@ create table RepairItems(
     model VARCHAR(15),
     price NUMERIC(7,2),
     custPhoneNo NUMERIC(10),
-    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
+    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE')
     foreign key (custPhoneNo) references Customers(custPhoneNo)
 );
 
