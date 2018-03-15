@@ -27,44 +27,27 @@
 	     print "<br> connection failed:";       
         exit;
 	}
-	//$queryString = ;
-	$query = oci_parse($conn, "Select * from RepairJob");
-    // $res =
-	oci_execute($query);
-	/*
+	$queryString = 'Select * from RepairJob';
+	$query = oci_parse($conn, $queryString);
+	$res = oci_execute($query);
+	
 	if (!$res) {
 		$e = oci_error($query); 
         		echo $e['message']; 
 		exit;
-	}*/
+	}
         
     // Fetch the results of the query
-    print "<table border=1>";
+    print "<table border='1'>\n";
     while ($row = oci_fetch_array($query, OCI_ASSOC+OCI_RETURN_NULLS)) {
-        print "<tr>";
+        print "<tr>\n";
         foreach ($row as $item) {
-            print "<td style='padding: 10px 10px;'>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>";
+            print "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
-        print "</tr>";
+        print "</tr>\n";
     }
         
-    print "</table>";   
-        
-        
-        
-     /*       echo "<TABLE BORDER=1 >";
-    echo "<TR><TH style='padding: 10px 10px;'>Rental</TH>
-          <TH style='padding: 10px 10px;'>Branch</TH>
-          <TH style='padding: 10px 10px;'>EmpName</TH>";
-      while (OCIFetch($sql_statement)) {
-          echo "<TR>";
-          for ($i = 1; $i <= $num_columns; $i++) {
-            $column_value = OCIResult($sql_statement, $i);
-            echo "<TD style='padding: 10px 10px;'>$column_value</TD>";
-          }
-          echo "</TR>";
-        }
-        echo "</TABLE>";*/
+    print "</table>\n";   
     
 	OCILogoff($conn);
 	?>

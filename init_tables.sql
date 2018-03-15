@@ -19,11 +19,22 @@
 -- CustomerBill(machineId, model, customerName, custPhoneNo, arrivalTime, timeOut, problemCodes, repair-personId, laborHours, partsUsedCost, totalCost)
 
 
+drop table CustomerBill;
+drop table ProblemReport;
+drop table ProblemCode;
+drop table RepairJob;
+drop table RepairPerson;
+drop table ServiceContract;
+drop table RepairItems;
+drop table Customers;
+
+
 -- Customer(custName, phoneNo)
 create table Customers(
     custFirst VARCHAR(15) NOT NULL,
     custLast VARCHAR(15) NOT NULL,
-    custPhoneNo NUMERIC(10) PRIMARY KEY
+    custPhoneNo NUMERIC(10) PRIMARY KEY,
+    custEmail VARCHAR(20)
 );
 
 
@@ -45,7 +56,7 @@ create table ServiceContract(
     startDate date NOT NULL,
     endDate date NOT NULL,
     machineID VARCHAR(5) UNIQUE NOT NULL,
-    machineID2 VARCHAR(5) UNIQUE,
+    machineID2 VARCHAR(5),
     custPhoneNo NUMERIC(10),
     -- contract is either single or group
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP'),
@@ -62,19 +73,19 @@ create table RepairPerson(
 );
 
 
--- Repair Job(machineID, contractID, arrivalTime, ownerInfo, jobstat)
+-- Repair Job(machineID, machineID2, contractID, arrivalTime, custPhoneNo, jobstat, employeeNo)
 -- DATE FORMAT: DD-MON-YYYY
 -- ex: select to_char(sysdate, 'DD-Mon-YYYY HH24:MI') as "Current Time" from dual;
 create table RepairJob(
     machineID VARCHAR(5) UNIQUE NOT NULL,
-    machineID2 VARCHAR(5) UNIQUE,
+    machineID2 VARCHAR(5),
     contractID VARCHAR(5),
-    arrivalTime TIMESTAMP, 
+    arrivalTime DATE, 
     custPhoneNo NUMERIC(10), 
     jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
     employeeNo VARCHAR(5),
-    foreign key (machineID) references ServiceContract(machineID),
-    foreign key (machineID2) references ServiceContract(machineID2),    
+    foreign key (machineID) references RepairItems(machineID),
+    foreign key (machineID2) references RepairItems(machineID),    
     foreign key (contractID) references ServiceContract(contractID),
     foreign key (custPhoneNo) references Customers(custPhoneNo),
     foreign key (employeeNo) references RepairPerson(employeeNo),
@@ -92,7 +103,7 @@ create table ProblemCode(
 -- Weak Entity depends on RepairJob
 create table ProblemReport(
     problemCode VARCHAR(30),
-    arrivalTime TIMESTAMP,
+    arrivalTime DATE,
     custPhoneNo NUMERIC(10),
     -- foreign key (custPhoneNo) references Customers(custPhoneNo),
     -- foreign key (arrivalTime) references RepairJob(arrivalTime),
@@ -113,14 +124,14 @@ create table CustomerBill(
     custPhoneNo NUMERIC(10), 
     arrivalTime DATE, 
     timeOut DATE, 
-    --single problem for now
+    -- single problem for now
     problemCode VARCHAR(30), 
     repair_personID VARCHAR(5), 
     laborHours NUMERIC(3,2), 
     partsUsedCost NUMERIC(5,2), 
     totalCost NUMERIC(5,2),
     foreign key (machineID) references RepairJob(machineID),
-    foreign key (machineID2) references RepairJob(machineID2),   
+    foreign key (machineID2) references RepairItems(machineID),   
     -- foreign key (model) references RepairItems(model),
     -- foreign key (custFirst) references Customers(custFirst),
     -- foreign key (custLast) references Customers(custLast),
