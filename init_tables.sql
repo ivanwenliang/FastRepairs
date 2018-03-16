@@ -66,7 +66,6 @@ create table ServiceContract(
     startDate date NOT NULL,
     endDate date NOT NULL,
     machineID VARCHAR(5) UNIQUE NOT NULL,
-    machineID2 VARCHAR(5),
     custPhoneNo NUMERIC(10),
     -- contract is either single or group
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP'),
@@ -87,19 +86,16 @@ create table RepairPerson(
 -- DATE FORMAT: DD-MON-YYYY
 -- ex: select to_char(sysdate, 'DD-Mon-YYYY HH24:MI') as "Current Time" from dual;
 create table RepairJob(
-    machineID VARCHAR(5) UNIQUE NOT NULL,
-    machineID2 VARCHAR(5),
+    machineID VARCHAR(5) PRIMARY KEY,
     contractID VARCHAR(5),
     arrivalTime TIMESTAMP, 
     custPhoneNo NUMERIC(10), 
-    jobstat VARCHAR(15) CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
+    jobstat VARCHAR(15) DEFAULT 'UNDER_REPAIR' CHECK (jobstat = 'UNDER_REPAIR' OR jobstat = 'READY' OR jobstat = 'DONE'),
     employeeNo VARCHAR(5),
-    foreign key (machineID) references RepairItems(machineID),
-    foreign key (machineID2) references RepairItems(machineID),    
+    foreign key (machineID) references RepairItems(machineID),    
     foreign key (contractID) references ServiceContract(contractID),
     foreign key (custPhoneNo) references Customers(custPhoneNo),
-    foreign key (employeeNo) references RepairPerson(employeeNo),
-    PRIMARY KEY(arrivalTime, custPhoneNo)
+    foreign key (employeeNo) references RepairPerson(employeeNo)
 );
 
 
@@ -113,8 +109,7 @@ create table ProblemReport(
     custPhoneNo NUMERIC(10),
     -- foreign key (custPhoneNo) references Customers(custPhoneNo),
     -- foreign key (arrivalTime) references RepairJob(arrivalTime),
-    PRIMARY KEY(arrivalTime, custPhoneNo),
-    constraint atime_cphone foreign key (arrivalTime,custPhoneNo) references RepairJob(arrivalTime,custPhoneNo)
+    PRIMARY KEY(arrivalTime, custPhoneNo)
 );
 
 
@@ -123,7 +118,6 @@ create table ProblemReport(
 -- References most of its content from other tables
 create table CustomerBill(
     machineID VARCHAR(5),
-    machineID2 VARCHAR(5),
     model VARCHAR(15), 
     custFirst VARCHAR(15),
     custLast VARCHAR(15),
@@ -136,8 +130,7 @@ create table CustomerBill(
     laborHours NUMERIC(3,2), 
     partsUsedCost NUMERIC(5,2), 
     totalCost NUMERIC(5,2),
-    foreign key (machineID) references RepairJob(machineID),
-    foreign key (machineID2) references RepairItems(machineID),   
+    foreign key (machineID) references RepairJob(machineID),  
     foreign key (custPhoneNo) references Customers(custPhoneNo),
     foreign key (repair_personID) references RepairPerson(employeeNo)
 );
