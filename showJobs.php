@@ -29,14 +29,14 @@
                   <li class="nav-item">
                     <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/itemInputForm.html">Home</a>
                   </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/machineStatus.html">Machine Status <span class="sr-only">(current)</span></a>
+                  <li class="nav-item">
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/machineStatus.php">Machine Status </a>
                   </li>
-                <li class="nav-item">
+                  <li class="nav-item">
                     <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/revenue.php">Show Revenue</a>
                   </li>
-                   <li class="nav-item">
-                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/showJobs.php">Show Repair Jobs</a>
+                   <li class="nav-item active">
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/showJobs.php">Show Repair Jobs<span class="sr-only">(current)</span></a>
                   </li>
                   
                 </ul>
@@ -45,7 +45,7 @@
 
 		<div class="container resize">
 			<div class="py-5 text-center">
-                <h2>Machine Status</h2>
+                <h2>Ongoing Repairs</h2>
                 <p class="lead">Easy Data Management for Employees</p>
             </div>
 
@@ -70,7 +70,7 @@
                          print "<br> connection failed:";
                         exit;
                     }
-                    $query = oci_parse($conn, "SELECT * FROM RepairItems LEFT JOIN RepairJob ON RepairItems.machineID = RepairJob.machineID");
+                    $query = oci_parse($conn, "SELECT * FROM RepairJob LEFT JOIN RepairPerson ON RepairJob.employeeNo = RepairPerson.employeeNo WHERE jobstat = 'UNDER_REPAIR'");
 
                     // Execute the query
                     oci_execute($query);
@@ -83,13 +83,12 @@
                         <tr>
 <!--                            <th style="width: 10%">#</th>-->
                             <th style="width: 10%">Machine ID</th>
-                            <th style="width: 20%">Model</th>
-                            <th style="width: 10%">Price</th>
-                            <th style="width: 10%">Customer Phone</th>
-                            <th style="width: 20%">Problem</th>
-                            <th style="width: 10%">Contract</th>
                             <th style="width: 10%">Contract ID</th>
-                            <th style= "width:10%">Status</th>
+                            <th style="width: 25%">Time In</th>
+                            <th style="width: 15%">Customer Phone</th>
+                            <th style= "width:15%">Status</th>
+                            <th style= "width:10%">Emp No</th>
+                            <th style= "width:15%">Emp Name</th>
                             <!-- <th style="width: 10%">Time Out</th>
                             <th style="width: 10%">Labor Hours</th> -->
                         </tr>
@@ -103,14 +102,16 @@
                             //$val = OCIResult($query, $i);
                             //echo "<td>&nbsp;$val&nbsp;</td>";
                         echo "<td>".$row[0]."</td>";  //machineID
-                        echo "<td>".$row[1]."</td>";  //model
-                        echo "<td>"."$".$row[2]."</td>";  //price
+                        if(empty ($row[1])) echo"<td>  </td>";   //contractID
+                           else echo "<td>".$row[1]."</td>";
+                        echo "<td>".$row[2]."</td>";  //timeIn
                         echo "<td>".$row[3]."</td>";  //custPhone
-                        echo "<td>".$row[4]."</td>";  //prob
-                        echo "<td>".$row[5]."</td>";  //contract
-                        if(empty ($row[6])) echo"<td>  </td>"; 
-                        else echo "<td>".$row[6]."</td>";  //cont ID
-                        echo "<td>".$row[11]."</td>";  //status
+                        echo "<td>".$row[4]."</td>";  //status
+                        echo "<td>".$row[5]."</td>";  //empNo
+                        echo "<td>".$row[7]." ".$row[8]."</td>";  //empName
+//                        if(empty ($row[6])) echo"<td>  </td>"; 
+//                        else echo "<td>".$row[6]."</td>";  //cont ID
+//                        echo "<td>".$row[11]."</td>";  //status
                         
                         
                         //echo "<td>".$row[7]."</td>";  //
@@ -131,6 +132,7 @@
 		      </div>
             </div>
 
+<!--
         <form method="post" action="http://students.engr.scu.edu/~mnaito/updateStatus.php">
         <div class="col-md-12 order-md-3 mb-4">
             <hr class="mb-4">
@@ -163,6 +165,7 @@
             <input type="submit" class="btn btn-primary btn-lg btn-block" name="submitForm" value="Update">
         </div>
         </form>
+-->
     </div>
 
 		<footer class="my-5 pt-5 text-muted text-center text-small">

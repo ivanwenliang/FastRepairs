@@ -124,9 +124,9 @@ create table CustomerBill(
     -- single problem for now
     problemCode VARCHAR(30), 
     repair_personID VARCHAR(5), 
-    laborHours NUMERIC(3,2) DEFAULT NULL, 
-    partsUsedCost NUMERIC(5,2), 
-    totalCost NUMERIC(5,2) DEFAULT NULL,
+    laborHours NUMERIC(5,2) DEFAULT NULL, 
+    partsUsedCost NUMERIC(10,2), 
+    totalCost NUMERIC(20,2) DEFAULT NULL,
     foreign key (machineID) references RepairJob(machineID),  
     foreign key (custPhoneNo) references Customers(custPhoneNo),
     foreign key (repair_personID) references RepairPerson(employeeNo)
