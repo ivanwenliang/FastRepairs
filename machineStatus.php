@@ -77,15 +77,15 @@
                         <tr>
 <!--                            <th style="width: 10%">#</th>-->
                             <th style="width: 10%">Machine ID</th>
-                            <th style="width: 10%">Model</th>
+                            <th style="width: 20%">Model</th>
                             <th style="width: 10%">Price</th>
                             <th style="width: 10%">Customer Phone</th>
-                            <th style="width: 10%">Problem</th>
+                            <th style="width: 20%">Problem</th>
                             <th style="width: 10%">Contract</th>
                             <th style="width: 10%">Contract ID</th>
                             <th style= "width:10%">Status</th>
-                            <th style="width: 10%">Time Out</th>
-                            <th style="width: 10%">Labor Hours</th>
+                            <!-- <th style="width: 10%">Time Out</th>
+                            <th style="width: 10%">Labor Hours</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -108,8 +108,8 @@
                         
                         
                         //echo "<td>".$row[7]."</td>";  //
-                        echo "<td><input type=\"text\" class=\"form-control resize\" id=\"timeOut\" name=\"timeOut\" placeholder=\"00:00\"></td>";
-                        echo "<td><input type=\"text\" class=\"form-control resize\" id=\"laborHours\" name=\"laborHours\" placeholder=\"0\"></td>";
+                        // echo "<td><input type=\"text\" class=\"form-control resize\" id=\"timeOut\" name=\"timeOut\" placeholder=\"00:00\"></td>";
+                        // echo "<td><input type=\"text\" class=\"form-control resize\" id=\"laborHours\" name=\"laborHours\" placeholder=\"0\"></td>";
                         echo "</tr>";
                     }
 
@@ -122,8 +122,41 @@
                         
 
                     </div>
-		</div>
-    </div>
+		      </div>
+            </div>
+
+        <form method="post" action="http://students.engr.scu.edu/~mnaito/updateStatus.php">
+        <div class="col-md-12 order-md-3 mb-4">
+            <hr class="mb-4">
+            <h4 class="mb-3">Update Information</h4>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="machineID">Machine ID</label>
+                     <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="">
+                     <small class="text-muted">Serial number of your machine</small>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="jobstat">Job Status</label>
+                    <select class="custom-select d-block w-100" id="jobstat" name="jobstat">
+                        <option value="">Choose...</option>
+                        <option>UNDER_REPAIR</option>
+                        <option>READY</option>
+                        <option>DONE</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="timeOut">Time Out</label>
+                     <input type="text" class="form-control" id="timeOut" name="timeOut" placeholder="" value="">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="laborHours">Labor Hours</label>
+                    <input type="text" class="form-control" id="laborHours" name="laborHours" placeholder="" value="">
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submitForm" value="Update">
+        </div>
+        </form>
     </div>
 
 		<footer class="my-5 pt-5 text-muted text-center text-small">

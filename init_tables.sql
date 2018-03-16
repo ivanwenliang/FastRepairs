@@ -114,19 +114,19 @@ create table ProblemReport(
 -- CustomerBill(machineId, model, customerName, custPhoneNo, arrivalTime, timeOut, problemCodes, repair_personId, laborHours, partsUsedCost, totalCost)
 -- References most of its content from other tables
 create table CustomerBill(
-    machineID VARCHAR(5),
-    model VARCHAR(15), 
+    machineID VARCHAR(5) PRIMARY KEY,
+    model VARCHAR(35), 
     custFirst VARCHAR(15),
     custLast VARCHAR(15),
     custPhoneNo NUMERIC(10), 
     arrivalTime TIMESTAMP, 
-    timeOut TIMESTAMP, 
+    timeOut DATE DEFAULT NULL, 
     -- single problem for now
     problemCode VARCHAR(30), 
     repair_personID VARCHAR(5), 
-    laborHours NUMERIC(3,2), 
+    laborHours NUMERIC(3,2) DEFAULT NULL, 
     partsUsedCost NUMERIC(5,2), 
-    totalCost NUMERIC(5,2),
+    totalCost NUMERIC(5,2) DEFAULT NULL,
     foreign key (machineID) references RepairJob(machineID),  
     foreign key (custPhoneNo) references Customers(custPhoneNo),
     foreign key (repair_personID) references RepairPerson(employeeNo)
