@@ -27,14 +27,17 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/itemInputForm.html">Home </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/Users/IvanLiang/FastRepairs/machineStatus.html">Machine Status</a>
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/machineStatus.php">Machine Status</a>
                   </li>
                   <li class="nav-item active">
-                  	<a class="nav-link" href="#">Show Revenue <span class="sr-only">(current)</span></a>
-                  </li>
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/revenue.php">Show Revenue<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/showJobs.php">Show Repair Jobs</a>
+                </li>
                 </ul>
             </div>
         </nav> 
@@ -49,10 +52,10 @@
             
 		<?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$begin= $_POST['startdate'];
-				$end= $_POST['enddate'];
-                $startdate = date('d-m-Y', $begin);
-                $enddate = date('d-m-Y', $end);
+				$startdate= $_POST['startdate'];
+				$enddate= $_POST['enddate'];
+                //$startdate = date('d-m-Y', strtotime($begin));
+                //$enddate = date('d-m-Y', strtotime($end));
 //				$revenueDate= date('Y-m-d');
 //				$revenueDate= date('Y-m-d', strtotime($revenueDate));
             }
@@ -68,7 +71,7 @@
                          print "<br> connection failed:";
                         exit;
                     }
-                    $query = oci_parse($conn, "SELECT SUM(price) FROM CustomerBill WHERE jobstat > :startdate AND jobstat < :enddate ");
+                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut > TO_DATE(':startdate', 'DD-MON-YYYY') AND timeOut < TO_DATE(':enddate', 'DD-MON-YYYY') ");
                 
                    	oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);

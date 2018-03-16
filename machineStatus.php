@@ -30,7 +30,7 @@
                     <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/itemInputForm.html">Home</a>
                   </li>
                   <li class="nav-item active">
-                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/machineStatus.html">Machine Status <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/machineStatus.php">Machine Status <span class="sr-only">(current)</span></a>
                   </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://students.engr.scu.edu/~mnaito/revenue.php">Show Revenue</a>
