@@ -49,6 +49,7 @@
             <div class="row">
                	<div class="card">
             		<div class="card-block">
+                        
         				<?php
         				if ($_SERVER["REQUEST_METHOD"] == "POST") {
         					$machineID= $_POST['machineID'];
@@ -68,12 +69,10 @@
     						//$queryString = ;
     						$query = oci_parse($conn, "SELECT * FROM CustomerBill WHERE machineID=:machineID");
     					    // $res =
+                            
+                            oci_bind_by_name($query, ':machineID', $machineID);
     						
     						oci_execute($query);
-    						$cols = OCINumCols($query);    					        
-        					    
-    					    OCILogoff($conn);
-        				}
         			    
         				
         				?>
@@ -87,6 +86,7 @@
 			                            <th style="width: ">First Name</th>
 			                            <th style="width: ">Last Name</th>
 			                            <th style="width: 10%">Customer Phone</th>
+                                        <th style="width: ">Contract</th>
 			                            <th style="width: ">Arrival Time</th>
 			                            <th style="width: ">Time Out</th>
 			                            <th style="width: 20%">Problem</th>
@@ -101,7 +101,6 @@
 			                    </thead>
 			                    <tbody>
 				                    <?php
-
 				                    while (($row = oci_fetch_array($query)) != false) {
 				                        echo "<tr>";
 				                        //for ($i = 1; $i < $cols + 1; $i ++){
@@ -119,6 +118,7 @@
 				                        echo "<td>".$row[9]."</td>";  //laborHours
 				                        echo "<td>".$row[10]."</td>";  //partsPrice
 				                        echo "<td>".$row[11]."</td>";  //totalPrice
+                                        echo "<td>".$row[12]."</td>";  //totalPrice
 				                    				 
 				                        echo "</tr>";
 				                    }
@@ -126,6 +126,8 @@
 					                OCIFreeStatement($query);
 					                OCILogoff($conn);
 					                // END PHP
+                            
+                        }
 					                ?>
 		                        
 		                        </tbody>
@@ -134,7 +136,6 @@
             		</div>
             	</div>
             </div>
-
 			
 		</div>
 
