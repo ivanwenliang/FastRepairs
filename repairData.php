@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		insertIntoCustomers($firstName,$lastName,$phoneNo,$email);
 		insertIntoRepairItems($machineID,$model,$price,$phoneNo,$problemCode,$serviceContractType,$contractID);
 		insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo);
-        insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$problemCode,$empNo,$price);
+        insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$serviceContractType,$arrivalTime,$problemCode,$empNo,$price);
 	}
 
 }
@@ -152,18 +152,19 @@ function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empN
 
 	//function insertIntoProblemReport()
 
-function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$problemCode,$empNo,$price) {
+function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$serviceContractType,$arrivalTime,$problemCode,$empNo,$price) {
     $conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
 	}
-	$query = oci_parse($conn, "INSERT INTO CustomerBill(machineID,model,custFirst,custLast,custPhoneNo,arrivalTime,problemCode,repair_personID,partsUsedCost) VALUES (:machineID,:model,:firstName,:lastName,:phoneNo,CURRENT_TIMESTAMP,:problemCode,:empNo,:price)");
+	$query = oci_parse($conn, "INSERT INTO CustomerBill(machineID,model,custFirst,custLast,custPhoneNo,serviceContractType,arrivalTime,problemCode,repair_personID,partsUsedCost) VALUES (:machineID,:model,:firstName,:lastName,:phoneNo,:ServiceContractType,:CURRENT_TIMESTAMP,:problemCode,:empNo,:price)");
 
 	oci_bind_by_name($query, ":machineID", $machineID);
     oci_bind_by_name($query, ':firstName', $firstName);
 	oci_bind_by_name($query, ':lastName', $lastName);
 	oci_bind_by_name($query, ':phoneNo', $phoneNo);
+    oci_bind_by_name($query, ':serviceContractType', $serviceContractType);
     oci_bind_by_name($query, ':problemCode', $problemCode);
 	oci_bind_by_name($query, ":model", $model);
 	oci_bind_by_name($query, ":empNo", $empNo);

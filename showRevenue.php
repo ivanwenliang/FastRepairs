@@ -52,16 +52,18 @@
             
 		<?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$begin= $_POST['startdate'];
-				$end= $_POST['enddate'];
-                $startdate = date('d-m-Y', strtotime($begin));
-                $enddate = date('d-m-Y', strtotime($end));
+				$startdate= $_POST['startdate'];
+				$enddate= $_POST['enddate'];
+                //$startdate = date('d-m-y', strtotime($begin));
+                //$enddate = date('d-m-y', strtotime($end));
+                
 //				$revenueDate= date('Y-m-d');
 //				$revenueDate= date('Y-m-d', strtotime($revenueDate));
             }
             
             if (isset($_POST['submitForm'])) {
                 showRevenue($startdate,$enddate);
+                //showActual($startdate,$enddate);
             }
 
 
@@ -71,11 +73,10 @@
                          print "<br> connection failed:";
                         exit;
                     }
-                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut BETWEEN TO_DATE(':startdate', 'DD-MON-YYYY') AND TO_DATE(':enddate', 'DD-MON-YYYY')");
-                
+                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR')");
                    oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);
-
+                   
                     // Execute the query
                     oci_execute($query);
                     ?>
@@ -87,7 +88,7 @@
 <!--                            <th style="width: 10%">#</th>-->
                             <th style="width: 35%">Start Date</th>
                             <th style="width: 35%">End Date</th>
-                            <th style="width: 30%">Revenue</th>
+                            <th style="width: 30%">Possible Revenue</th>
                             <!-- <th style="width: 10%">Time Out</th>
                             <th style="width: 10%">Labor Hours</th> -->
                         </tr>
@@ -97,23 +98,9 @@
                     <?php
                     while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
                         echo "<tr>";
-                        //for ($i = 1; $i < $cols + 1; $i ++){
-                            //$val = OCIResult($query, $i);
-                            //echo "<td>&nbsp;$val&nbsp;</td>";
                         echo "<td>".$startdate."</td>";  //machineID
                         echo "<td>".$enddate."</td>";  //model
                         echo "<td>"."$".$row[0]."</td>";  //price
-//                        echo "<td>".$row[3]."</td>";  //custPhone
-//                        echo "<td>".$row[4]."</td>";  //prob
-//                        echo "<td>".$row[5]."</td>";  //contract
-//                        if(empty ($row[6])) echo"<td>  </td>"; 
-//                        else echo "<td>".$row[6]."</td>";  //cont ID
-//                        echo "<td>".$row[11]."</td>";  //status
-                        
-                        
-                        //echo "<td>".$row[7]."</td>";  //
-                        // echo "<td><input type=\"text\" class=\"form-control resize\" id=\"timeOut\" name=\"timeOut\" placeholder=\"00:00\"></td>";
-                        // echo "<td><input type=\"text\" class=\"form-control resize\" id=\"laborHours\" name=\"laborHours\" placeholder=\"0\"></td>";
                         echo "</tr>";
                     }
 
@@ -122,14 +109,81 @@
                 // END PHP
                 
             }
-                ?>
+            ?>
                         
             </tbody></table>
                         
             
-        </div>
-        </div>
+            </div>
 
+        
+        <div>
+            
+		<?php
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				$startdate= $_POST['startdate'];
+				$enddate= $_POST['enddate'];
+                //$startdate = date('d-m-y', strtotime($begin));
+                //$enddate = date('d-m-y', strtotime($end));
+                
+//				$revenueDate= date('Y-m-d');
+//				$revenueDate= date('Y-m-d', strtotime($revenueDate));
+            }
+            
+            if (isset($_POST['submitForm'])) {
+                showActual($startdate,$enddate);
+            }    
+            
+            function showActual($startdate,$enddate){
+                $conn=oci_connect('mnaito', 'Naalii10!', '//dbserver.engr.scu.edu/db11g');
+                    if(!$conn) {
+                         print "<br> connection failed:";
+                        exit;
+                    }
+                    $query = oci_parse($conn, "SELECT SUM(totalCost), serviceContractType FROM CustomerBill WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR') GROUP BY serviceContractType HAVING serviceContractType = 'NONE'");
+                   oci_bind_by_name($query, ':startdate', $startdate);
+	               oci_bind_by_name($query, ':enddate', $enddate);
+                   
+                    // Execute the query
+                    oci_execute($query);
+                    ?>
+                        
+                        
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+<!--                            <th style="width: 10%">#</th>-->
+                            <th style="width: 35%">Start Date</th>
+                            <th style="width: 35%">End Date</th>
+                            <th style="width: 30%">Actual Revenue</th>
+                            <!-- <th style="width: 10%">Time Out</th>
+                            <th style="width: 10%">Labor Hours</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    <?php
+                    while (($row = oci_fetch_array($query, OCI_BOTH)) != false) {
+                        echo "<tr>";
+                        echo "<td>".$startdate."</td>";  //machineID
+                        echo "<td>".$enddate."</td>";  //model
+                        echo "<td>"."$".$row[0]."</td>";  //price
+                        echo "</tr>";
+                    }
+
+                OCIFreeStatement($query);
+                OCILogoff($conn);
+                // END PHP
+            }
+            
+                ?>
+                        
+            </tbody></table>
+                        
+
+        </div>
+            
+        </div>
             
             
             

@@ -118,7 +118,8 @@ create table CustomerBill(
     model VARCHAR(35), 
     custFirst VARCHAR(15),
     custLast VARCHAR(15),
-    custPhoneNo NUMERIC(10), 
+    custPhoneNo NUMERIC(10),
+    serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
     arrivalTime TIMESTAMP, 
     timeOut DATE DEFAULT NULL, 
     -- single problem for now
@@ -126,7 +127,7 @@ create table CustomerBill(
     repair_personID VARCHAR(5), 
     laborHours NUMERIC(5,2) DEFAULT NULL, 
     partsUsedCost NUMERIC(10,2), 
-    totalCost NUMERIC(20,2) DEFAULT NULL,
+    totalCost NUMERIC(20,2) DEFAULT 0,
     foreign key (machineID) references RepairJob(machineID),  
     foreign key (custPhoneNo) references Customers(custPhoneNo),
     foreign key (repair_personID) references RepairPerson(employeeNo)
