@@ -7,6 +7,10 @@ body {
 	max-width: 960px;
 }
 
+.container.resize{
+    max-width: 90%;
+}
+
 .table {
 	border-radius: 4px;
 }
@@ -19,6 +23,12 @@ body {
 
 .lh-condensed { line-height: 1.25; }
 
-/*input.form-control {
+/*
+input.form-control {
   width: auto;
-}*/
+}
+*/
+
+input.resize{
+  width: 100%;
+}
