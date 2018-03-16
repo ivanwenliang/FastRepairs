@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if (isset($_POST['submitForm'])) {
 		insertIntoCustomers($firstName,$lastName,$phoneNo,$email);
-		insertIntoRepairItems($machineID,$model,$price,$problemCode,$serviceContractType,$contractID);
+		insertIntoRepairItems($machineID,$model,$price,$phoneNo,$problemCode,$serviceContractType,$contractID);
 		insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo);
 	}
 

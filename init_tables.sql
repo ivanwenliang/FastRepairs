@@ -93,8 +93,7 @@ create table RepairJob(
     employeeNo VARCHAR(5),
     foreign key (machineID) references RepairItems(machineID),    
     foreign key (contractID) references ServiceContract(contractID),
-    foreign key (custPhoneNo) references Customers(custPhoneNo),
-    foreign key (employeeNo) references RepairPerson(employeeNo)
+    foreign key (custPhoneNo) references Customers(custPhoneNo)
 );
 
 
@@ -105,10 +104,9 @@ create table RepairJob(
 create table ProblemReport(
     problemCode VARCHAR(30),
     arrivalTime TIMESTAMP,
-    custPhoneNo NUMERIC(10),
+    custPhoneNo NUMERIC(10) PRIMARY KEY
     -- foreign key (custPhoneNo) references Customers(custPhoneNo),
     -- foreign key (arrivalTime) references RepairJob(arrivalTime),
-    PRIMARY KEY(arrivalTime, custPhoneNo)
 );
 
 
