@@ -44,7 +44,6 @@
 		<div class="container bill">
 			<div class="py-5 text-center">
                 <h2>Customer Bill</h2>
-                <p class="lead">Easy Data Management for Employees</p>
             </div>
 
             <div class="row">

@@ -163,6 +163,22 @@
             <input type="submit" class="btn btn-primary btn-lg btn-block" name="submitForm" value="Update">
         </div>
         </form>
+
+        <hr class="mb-4">
+
+        <form method="post" action="http://students.engr.scu.edu/~mnaito/showData.php">
+            <h4 class="mb-3">Show Bill</h4>
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="col-md-3 mb-3">
+                        <label for="machineID">Machine ID</label>
+                        <input type="text" class="form-control" id="machineID" name="machineID" placeholder="" value="">
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submitForm" value="Submit">
+        </form>
     </div>
 
 		<footer class="my-5 pt-5 text-muted text-center text-small">
