@@ -11,6 +11,10 @@ body {
     max-width: 90%;
 }
 
+.container.bill {
+	max-width: 95%;
+}
+
 .table {
 	border-radius: 4px;
 }
