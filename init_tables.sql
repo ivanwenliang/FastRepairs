@@ -48,15 +48,14 @@ create table ProblemCode(
 -- List of individual machines, get info at time of input
 create table RepairItems(
     machineID VARCHAR(5) PRIMARY KEY,
-    model VARCHAR(15),
+    model VARCHAR(35),
     price NUMERIC(7,2),
     custPhoneNo NUMERIC(10),
     problemCode VARCHAR(30),
     serviceContractType VARCHAR(15) CHECK (serviceContractType = 'SINGLE' OR serviceContractType = 'GROUP' OR serviceContractType = 'NONE'),
-    contractID VARCHAR(5),
+    contractID VARCHAR(5) DEFAULT NULL,
     foreign key (custPhoneNo) references Customers(custPhoneNo),
-    foreign key (problemCode) references ProblemCode(problemCode),
-    foreign key (custPhoneNo) references Customers(custPhoneNo)
+    foreign key (problemCode) references ProblemCode(problemCode)
 );
 
 

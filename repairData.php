@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$price= $_POST['price'];
 	$contractID= $_POST['contractID'];
 	$empNo= $_POST['empNo'];
+	$serviceContractType= $_POST['serviceContractType'];
 
 	//More info
 	$arrivalTime= "CURRENT_TIMESTAMP";
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	if (isset($_POST['submitForm'])) {
 		insertIntoCustomers($firstName,$lastName,$phoneNo,$email);
-		insertIntoRepairItems($machineId,$model,$price,$problemCode);
+		insertIntoRepairItems($machineID,$model,$price,$problemCode,$serviceContractType,$contractID);
 		insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo);
 	}
 
@@ -51,18 +52,22 @@ function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
 
 
 //add service contract type
-function insertIntoRepairItems($machineID, $model, $price, $problemCode) {
+function insertIntoRepairItems($machineID, $model, $price, $phoneNo, $problemCode,$serviceContractType,$contractID) {
 	$conn=oci_connect('iliang','Guld123098!','//dbserver.engr.scu.edu/db11g');
 	if (!conn) {
 		print "<br> connection failed:";
 		exit;
 	}
-	$query = oci_parse($conn, "INSERT INTO RepairItems(machineID,model,price,problemCode) VALUES(:machineID,:model,:price,:problemCode)");
+	$query = oci_parse($conn, "INSERT INTO RepairItems(machineID,model,price,custPhoneNo,problemCode,serviceContractType,contractID) VALUES(:machineID,:model,:price,:phoneNo,:problemCode,:serviceContractType,:contractID)");
 
 	oci_bind_by_name($query, ':machineID', $machineID);
 	oci_bind_by_name($query, ':model', $model);
 	oci_bind_by_name($query, ':price', $price);
 	oci_bind_by_name($query, ':problemCode', $problemCode);
+	oci_bind_by_name($query, ':serviceContractType', $serviceContractType);
+	oci_bind_by_name($query, ':contractID', $contractID);
+	oci_bind_by_name($query, ':phoneNo', $phoneNo);
+
 
 	$res = oci_execute($query);
 	if ($res)
@@ -82,10 +87,9 @@ function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empN
 		print "<br> connection failed:";
 		exit;
 	}
-	$query = oci_parse($conn, "INSERT INTO RepairJob(machineID,machineID2,contractID,arrivalTime,custPhoneNo,employeeNo) VALUES (:machineID,:machineID2,:contractID,CURRENT_TIMESTAMP,:phoneNo,:empNo)");
+	$query = oci_parse($conn, "INSERT INTO RepairJob(machineID,contractID,arrivalTime,custPhoneNo,employeeNo) VALUES (:machineID,:contractID,CURRENT_TIMESTAMP,:phoneNo,:empNo)");
 
 	oci_bind_by_name($query, ":machineID", $machineID);
-	oci_bind_by_name($query, ":machineID2", $machineID2);
 	oci_bind_by_name($query, ":contractID", $contractID);
 	//oci_bind_by_name($query, ":arrivalTime", $arrivalTime);
 	oci_bind_by_name($query, ":phoneNo", $phoneNo);
