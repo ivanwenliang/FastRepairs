@@ -52,10 +52,10 @@
             
 		<?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
-				$startdate= $_POST['startdate'];
-				$enddate= $_POST['enddate'];
-                //$startdate = date('d-m-Y', strtotime($begin));
-                //$enddate = date('d-m-Y', strtotime($end));
+				$begin= $_POST['startdate'];
+				$end= $_POST['enddate'];
+                $startdate = date('d-m-Y', strtotime($begin));
+                $enddate = date('d-m-Y', strtotime($end));
 //				$revenueDate= date('Y-m-d');
 //				$revenueDate= date('Y-m-d', strtotime($revenueDate));
             }
@@ -71,9 +71,9 @@
                          print "<br> connection failed:";
                         exit;
                     }
-                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut > TO_DATE(':startdate', 'DD-MON-YYYY') AND timeOut < TO_DATE(':enddate', 'DD-MON-YYYY') ");
+                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut BETWEEN TO_DATE(':startdate', 'DD-MON-YYYY') AND TO_DATE(':enddate', 'DD-MON-YYYY')");
                 
-                   	oci_bind_by_name($query, ':startdate', $startdate);
+                   oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);
 
                     // Execute the query
