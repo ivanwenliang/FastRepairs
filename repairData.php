@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
 	$conn=oci_connect('iliang','Guld123098!','//dbserver.engr.scu.edu/db11g');
-	if (!conn) {
+	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
 	}
@@ -54,7 +54,7 @@ function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
 //add service contract type
 function insertIntoRepairItems($machineID, $model, $price, $phoneNo, $problemCode,$serviceContractType,$contractID) {
 	$conn=oci_connect('iliang','Guld123098!','//dbserver.engr.scu.edu/db11g');
-	if (!conn) {
+	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
 	}
@@ -83,7 +83,7 @@ function insertIntoRepairItems($machineID, $model, $price, $phoneNo, $problemCod
 //insert default under repair status
 function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo) {
 	$conn=oci_connect('iliang','Guld123098!','//dbserver.engr.scu.edu/db11g');
-	if (!conn) {
+	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
 	}
