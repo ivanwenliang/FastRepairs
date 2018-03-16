@@ -108,8 +108,8 @@ function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empN
 
 	//function insertIntoProblemReport()
 
-	// function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCode,$repair_personID,$laborHours) {
+function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$arrivalTime,$timeOut,$problemCode,$repair_personID,$laborHours) {
 
-	// }
+}
 
 ?>
