@@ -54,11 +54,6 @@
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$startdate= $_POST['startdate'];
 				$enddate= $_POST['enddate'];
-                //$startdate = date('d-m-y', strtotime($begin));
-                //$enddate = date('d-m-y', strtotime($end));
-                
-//				$revenueDate= date('Y-m-d');
-//				$revenueDate= date('Y-m-d', strtotime($revenueDate));
             }
             
             if (isset($_POST['submitForm'])) {
@@ -68,11 +63,12 @@
 
 
             function showRevenue($startdate,$enddate){
-                $conn=oci_connect('mnaito', 'Naalii10!', '//dbserver.engr.scu.edu/db11g');
+                $conn=oci_connect('username', 'password', '//dbserver.engr.scu.edu/db11g');
                     if(!$conn) {
                          print "<br> connection failed:";
                         exit;
                     }
+                    //show possible revenue between certain dates
                     $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR')");
                    oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);
@@ -85,12 +81,10 @@
                     <table class="table table-hover">
                     <thead>
                         <tr>
-<!--                            <th style="width: 10%">#</th>-->
                             <th style="width: 35%">Start Date</th>
                             <th style="width: 35%">End Date</th>
                             <th style="width: 30%">Possible Revenue</th>
-                            <!-- <th style="width: 10%">Time Out</th>
-                            <th style="width: 10%">Labor Hours</th> -->
+
                         </tr>
                     </thead>
                     <tbody>
@@ -123,23 +117,20 @@
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$startdate= $_POST['startdate'];
 				$enddate= $_POST['enddate'];
-                //$startdate = date('d-m-y', strtotime($begin));
-                //$enddate = date('d-m-y', strtotime($end));
-                
-//				$revenueDate= date('Y-m-d');
-//				$revenueDate= date('Y-m-d', strtotime($revenueDate));
             }
             
             if (isset($_POST['submitForm'])) {
                 showActual($startdate,$enddate);
             }    
             
+            
             function showActual($startdate,$enddate){
-                $conn=oci_connect('mnaito', 'Naalii10!', '//dbserver.engr.scu.edu/db11g');
+                $conn=oci_connect('username', 'password', '//dbserver.engr.scu.edu/db11g');
                     if(!$conn) {
                          print "<br> connection failed:";
                         exit;
                     }
+                    //show possible revenue between certain dates
                     $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill NATURAL JOIN RepairItems WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR') GROUP BY serviceContractType HAVING serviceContractType = 'NONE'");
                    oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);
@@ -152,12 +143,10 @@
                     <table class="table table-hover">
                     <thead>
                         <tr>
-<!--                            <th style="width: 10%">#</th>-->
                             <th style="width: 35%">Start Date</th>
                             <th style="width: 35%">End Date</th>
                             <th style="width: 30%">Actual Revenue</th>
-                            <!-- <th style="width: 10%">Time Out</th>
-                            <th style="width: 10%">Labor Hours</th> -->
+
                         </tr>
                     </thead>
                     <tbody>

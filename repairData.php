@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
-	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
@@ -96,7 +96,7 @@ function insertIntoCustomers($firstName, $lastName, $phoneNo, $email) {
 
 //add service contract type
 function insertIntoRepairItems($machineID, $model, $price, $phoneNo, $problemCode,$serviceContractType,$contractID) {
-	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
@@ -125,7 +125,7 @@ function insertIntoRepairItems($machineID, $model, $price, $phoneNo, $problemCod
 
 //insert default under repair status
 function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo) {
-	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
@@ -152,7 +152,7 @@ function insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empN
 	//function insertIntoProblemReport()
 
 function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$serviceContractType,$arrivalTime,$problemCode,$empNo,$price) {
-    $conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+    $conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;

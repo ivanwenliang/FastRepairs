@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function insertTotalCost($machineID,$laborHours){
-    	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+    	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
@@ -44,7 +44,7 @@ function insertTotalCost($machineID,$laborHours){
 
 
 function updateRepairItems($machineID,$jobstat) {
-	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;
@@ -65,7 +65,7 @@ function updateRepairItems($machineID,$jobstat) {
 }
 
 function insertHoursTime($machineID,$timeOut,$laborHours) {
-	$conn=oci_connect('mnaito','Naalii10!','//dbserver.engr.scu.edu/db11g');
+	$conn=oci_connect('username','password','//dbserver.engr.scu.edu/db11g');
 	if (!$conn) {
 		print "<br> connection failed:";
 		exit;

@@ -65,7 +65,7 @@
 //                    function showItems(){
 
                     //connect to your database. Type in your username, password and the DB path
-                    $conn=oci_connect('mnaito', 'Naalii10!', '//dbserver.engr.scu.edu/db11g');
+                    $conn=oci_connect('username', 'password', '//dbserver.engr.scu.edu/db11g');
                     if(!$conn) {
                          print "<br> connection failed:";
                         exit;
