@@ -140,7 +140,7 @@
                          print "<br> connection failed:";
                         exit;
                     }
-                    $query = oci_parse($conn, "SELECT SUM(totalCost), serviceContractType FROM CustomerBill WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR') GROUP BY serviceContractType HAVING serviceContractType = 'NONE'");
+                    $query = oci_parse($conn, "SELECT SUM(totalCost) FROM CustomerBill NATURAL JOIN RepairItems WHERE timeOut >= TO_DATE(:startdate, 'DD-MON-RR') AND timeOut <= TO_DATE(:enddate, 'DD-MON-RR') GROUP BY serviceContractType HAVING serviceContractType = 'NONE'");
                    oci_bind_by_name($query, ':startdate', $startdate);
 	               oci_bind_by_name($query, ':enddate', $enddate);
                    

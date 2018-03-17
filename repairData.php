@@ -65,8 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_POST['submitForm'])) {
 		insertIntoCustomers($firstName,$lastName,$phoneNo,$email);
 		insertIntoRepairItems($machineID,$model,$price,$phoneNo,$problemCode,$serviceContractType,$contractID);
-		insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo);
-        insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$serviceContractType,$arrivalTime,$problemCode,$empNo,$price);
+		insertIntoRepairJobs($machineID,$contractID,$arrivalTime,$phoneNo,$empNo); insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo, $serviceContractType, $arrivalTime,$problemCode,$empNo,$price);
 	}
 
 }
@@ -158,21 +157,21 @@ function insertIntoBill($machineID,$model,$firstName,$lastName,$phoneNo,$service
 		print "<br> connection failed:";
 		exit;
 	}
-	$query = oci_parse($conn, "INSERT INTO CustomerBill(machineID,model,custFirst,custLast,custPhoneNo,serviceContractType,arrivalTime,problemCode,repair_personID,partsUsedCost) VALUES (:machineID,:model,:firstName,:lastName,:phoneNo,:ServiceContractType,:CURRENT_TIMESTAMP,:problemCode,:empNo,:price)");
+	$query = oci_parse($conn, "INSERT INTO CustomerBill(machineID,model,custFirst,custLast,custPhoneNo, serviceContractType,arrivalTime,problemCode,repair_personID,partsUsedCost) VALUES (:machineID,:model,:firstName,:lastName,:phoneNo,:serviceContractType,CURRENT_TIMESTAMP,:problemCode,:empNo,:price)");
 
 	oci_bind_by_name($query, ":machineID", $machineID);
+    oci_bind_by_name($query, ":model", $model);
     oci_bind_by_name($query, ':firstName', $firstName);
 	oci_bind_by_name($query, ':lastName', $lastName);
 	oci_bind_by_name($query, ':phoneNo', $phoneNo);
     oci_bind_by_name($query, ':serviceContractType', $serviceContractType);
     oci_bind_by_name($query, ':problemCode', $problemCode);
-	oci_bind_by_name($query, ":model", $model);
 	oci_bind_by_name($query, ":empNo", $empNo);
 	oci_bind_by_name($query, ":price", $price);
     
 	$res = oci_execute($query);
 	if ($res)
-		echo '<br><br> <p style="color:green;font-size:20px">Data successfully inserted</p>';
+		echo '<br><br> <p style="color:green;font-size:20px">Insert Bill: Data successfully inserted</p>';
 	else{
 		$e = oci_error($query); 
         	echo $e['message']; 

@@ -81,19 +81,19 @@
 			                    <thead>
 			                        <tr>
 			<!--                            <th style="width: 10%">#</th>-->
-			                            <th style="width: 10%">Machine ID</th>
-			                            <th style="width: 20%">Model</th>
-			                            <th style="width: ">First Name</th>
-			                            <th style="width: ">Last Name</th>
+			                            <th style="width: 6%">Machine ID</th>
+			                            <th style="width: 10%">Model</th>
+			                            <th style="width: 6%">First Name</th>
+			                            <th style="width: 6%">Last Name</th>
 			                            <th style="width: 10%">Customer Phone</th>
-                                        <th style="width: ">Contract</th>
-			                            <th style="width: ">Arrival Time</th>
-			                            <th style="width: ">Time Out</th>
-			                            <th style="width: 20%">Problem</th>
-			                            <th style="width: ">Employee Number</th>
-			                            <th style="width: ">Labour Hours</th>
-			                            <th style="width: 10%">Parts Price</th>
-			                            <th style="width: ">Total Cost</th>
+                                        <th style="width: 5%">Contract</th>
+			                            <th style="width: 10%">Arrival Time</th>
+			                            <th style="width: 10%">Time Out</th>
+			                            <th style="width: 10%">Problem</th>
+			                            <th style="width: 10%">Employee Number</th>
+			                            <th style="width: 6%">Labour Hours</th>
+			                            <th style="width: 6%">Parts Price</th>
+			                            <th style="width: 5%">Total Cost</th>
 			                           
 			                            <!-- <th style="width: 10%">Time Out</th>
 			                            <th style="width: 10%">Labor Hours</th> -->

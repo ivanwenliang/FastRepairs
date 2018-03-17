@@ -24,7 +24,7 @@ function insertTotalCost($machineID,$laborHours){
 		print "<br> connection failed:";
 		exit;
 	}
-	$query = oci_parse($conn,"UPDATE CustomerBill SET totalCost= (totalCost + 50 + :laborHours * 20) WHERE machineID=:machineID "); 
+	$query = oci_parse($conn,"UPDATE CustomerBill SET totalCost= (totalCost + 50 + :laborHours * 20 + partsUsedCost) WHERE machineID=:machineID AND serviceContractType='NONE'"); 
     
 //    AND serviceContractType='NONE' ");
 
